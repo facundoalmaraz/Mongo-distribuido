@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  campus_central:
+    image: mongo:latest
+    container_name: campus_central
+    ports:
+      - "27017:27017"  # Puerto de campus central
+    environment:
+      - MONGO_INITDB_REPLICA_SET_NAME=rs0
+    command: ["mongod", "--replSet", "rs0"]
+    networks:
+      - mongo-cluster
+
+  campus_norte:
+    image: mongo:latest
+    container_name: campus_norte
+    ports:
+      - "27018:27017"  # Puerto de campus norte
+    environment:
+      - MONGO_INITDB_REPLICA_SET_NAME=rs0
+    command: ["mongod", "--replSet", "rs0"]
+    networks:
+      - mongo-cluster
+
+  campus_sur:
+    image: mongo:latest
+    container_name: campus_sur
+    ports:
+      - "27019:27017"  # Puerto de campus sur
+    environment:
+      - MONGO_INITDB_REPLICA_SET_NAME=rs0
+    command: ["mongod", "--replSet", "rs0"]
+    networks:
+      - mongo-cluster
+
+networks:
+  mongo-cluster:
+    driver: bridge
