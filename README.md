@@ -88,6 +88,17 @@ En el shell de MongoDB, ejecuta el siguiente comando para iniciar el replica set
 })
 
 ```
+```javascript
+rs.reconfig({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "campus_central:27017", priority: 2 },
+    { _id: 1, host: "campus_norte:27017", priority: 1 },
+    { _id: 2, host: "campus_sur:27017", priority: 1 }
+  ]
+}, { force: true })
+```
+
 
 ### Paso 4: Insertar Datos de Ejemplo
 Con el replica set configurado, crea una base de datos de ejemplo y una colección para almacenar información de estudiantes:
